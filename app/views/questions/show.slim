@@ -1,0 +1,11 @@
+.col-md-8.col-md-offset-2
+  h1.text-center = @question.title
+
+
+.col-md-8.col-md-offset-2
+  = link_to fa_icon("pencil", text: " Edit"), edit_question_path(@question), class: "pull-right"
+  .clearfix
+  .well.well-lg = @question.body
+
+.col-md-8.col-md-offset-2.text-right
+  

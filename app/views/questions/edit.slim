@@ -1,0 +1,13 @@
+h1.page-header.text-center.m-b-30
+  a.pull-left.text-muted href="#{question_path(@question)}"
+    span.glyphicon.glyphicon-arrow-left
+  |  Edit Question
+ 
+= render "form"
+
+hr  
+
+= link_to "Delete", 
+    question_path(@question), 
+    method: :delete, 
+    data: {confirm: "Are you sure?"}

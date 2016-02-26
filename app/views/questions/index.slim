@@ -1,0 +1,11 @@
+h1.page-header.text-center Questions
+
+.row 
+  - @questions.each do |q|
+    a href="#{question_path(q)}"  
+      .col-xs-12.col-md-4
+        .well.well-lg.text-center #{q.title}
+
+
+.container.text-center
+  = paginate @questions

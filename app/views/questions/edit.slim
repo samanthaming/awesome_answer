@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 h1.page-header.text-center
+=======
+h1.page-header.text-center.m-b-30
+>>>>>>> dc3bc00208babb0bc855dd3cef59a7e8ad80b226
   a.pull-left.text-muted href="#{question_path(@question)}"
     span.glyphicon.glyphicon-arrow-left
   |  Edit Question
@@ -7,8 +11,15 @@ h1.page-header.text-center
 
 hr  
 
+<<<<<<< HEAD
 .container
   = link_to "Delete", 
       question_path(@question), 
       method: :delete, 
       data: {confirm: "Are you sure?"}
+=======
+= link_to "Delete", 
+    question_path(@question), 
+    method: :delete, 
+    data: {confirm: "Are you sure?"}
+>>>>>>> dc3bc00208babb0bc855dd3cef59a7e8ad80b226

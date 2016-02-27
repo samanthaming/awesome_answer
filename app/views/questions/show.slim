@@ -1,7 +1,13 @@
+<<<<<<< HEAD
 h1.page-header.text-center 
   a.pull-left.text-muted href="#{questions_path}"
     span.glyphicon.glyphicon-arrow-left
   = @question.title
+=======
+.col-md-8.col-md-offset-2
+  h1.text-center = @question.title
+
+>>>>>>> dc3bc00208babb0bc855dd3cef59a7e8ad80b226
 
 .col-md-8.col-md-offset-2
   = link_to fa_icon("pencil", text: " Edit"), edit_question_path(@question), class: "pull-right"

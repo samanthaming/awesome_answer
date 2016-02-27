@@ -1,4 +1,7 @@
 class Question < ActiveRecord::Base
+  belongs_to :category
+  has_many :answers, dependent: :destroy
+  has_many :comments, through: :answers 
 
   # this will fail validations (so it won't create or save) if the title is
   # not provided

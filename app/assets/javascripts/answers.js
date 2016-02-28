@@ -21,4 +21,12 @@ $(document).ready(function() {
     e.preventDefault();
     $answerFormAction.slideUp();
   });
+
+  // Show delete answer button, when hover on that line
+  $('#answer-list').find('li').on('mouseenter',function() {
+    $(this).find('#delete-answer-button').fadeIn();
+  }).on('mouseleave',function() {
+    $(this).find('#delete-answer-button').hide();
+  });
+
 });

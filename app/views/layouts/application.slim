@@ -6,29 +6,33 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   
-  body 
-    nav.navbar.navbar-default
-      .container
-        .navbar-header
-          button.navbar-toggle type="button" data-toggle="collapse" data-target="#myNavbar"
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
-          a.navbar-brand href="#{root_path}" AwesomeAnswer
-        
-        .collapse.navbar-collapse#myNavbar.text-center
-          ul.nav.navbar-nav
-            li = link_to "Home", root_path
-            li = link_to fa_icon("plus", text: " Question"), new_question_path
-          ul.nav.navbar-nav.navbar-right
-            li = link_to "Signup", root_path  
-            li = link_to "Login", root_path  
+  - if params[:controller] === "questions"
+    body[data-no-turbolink="true"]  
+  - else
+    body
 
-    .container-fluid
-      - if alert
-        .alert.alert-danger role="alert" = alert
-      - elsif notice
-        .alert.alert-warning role="alert" = notice
-      -else  
+  nav.navbar.navbar-default
+    .container
+      .navbar-header
+        button.navbar-toggle type="button" data-toggle="collapse" data-target="#myNavbar"
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a.navbar-brand href="#{root_path}" AwesomeAnswer
       
-      = yield
+      .collapse.navbar-collapse#myNavbar.text-center
+        ul.nav.navbar-nav
+          li = link_to "Home", root_path
+          li = link_to fa_icon("plus", text: " Question"), new_question_path
+        ul.nav.navbar-nav.navbar-right
+          li = link_to "Signup", root_path  
+          li = link_to "Login", root_path  
+
+  .container-fluid
+    - if alert
+      .alert.alert-danger role="alert" = alert
+    - elsif notice
+      .alert.alert-warning role="alert" = notice
+    -else  
+    
+    = yield

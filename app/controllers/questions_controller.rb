@@ -1,4 +1,5 @@
 class QuestionsController < ApplicationController
+  before_action :find_question, only: [:show, :edit, :update, :destroy]
 
   def new
     @question  = Question.new
@@ -15,7 +16,10 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @question = Question.find params[:id]
+    # @question = Question.find params[:id]
+    @question.view_count += 1
+    @question.save
+    @answer = Answer.new
   end
 
   def index
@@ -23,11 +27,11 @@ class QuestionsController < ApplicationController
   end
 
   def edit
-    @question = Question.find params[:id]
+    # @question = Question.find params[:id]
   end
 
   def update
-    @question = Question.find params[:id]
+    # @question = Question.find params[:id]
 
     if @question.update question_params
       redirect_to question_path(@question), notice: "Question Updated"
@@ -37,7 +41,7 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    @question = Question.find params[:id]
+    # @question = Question.find params[:id]
     @question.destroy
     redirect_to questions_path, alert: "Question Deleted"
   end
@@ -45,7 +49,11 @@ class QuestionsController < ApplicationController
   private
 
   def question_params
-    params.require(:question).permit([:title, :body])
+    params.require(:question).permit([:title, :body, :category_id])
+  end
+
+  def find_question
+    @question = Question.find params[:id]
   end
 
 end

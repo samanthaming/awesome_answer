@@ -1,7 +1,7 @@
 class Question < ActiveRecord::Base
   belongs_to :category
   has_many :answers, dependent: :destroy
-  has_many :comments, through: :answers 
+  has_many :comments, through: :answers
 
   # this will fail validations (so it won't create or save) if the title is
   # not provided
@@ -55,6 +55,9 @@ class Question < ActiveRecord::Base
 
   scope :search, -> term {where(["title ILIKE ? OR body ILIKE ?", "%#{term}%", "%#{term}%"]).order("view_count DESC")}
 
+  def category_name
+    category.name if category
+  end
 
   private
 

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root "questions#index"
-  
+
   # The main job of the routes:
   # You map a request to a controller with no action
   get "/hello/" => "welcome#index"
@@ -17,5 +17,8 @@ Rails.application.routes.draw do
   post "/subscribe" => "subscribe#create"
 
 
-  resources :questions
+  resources :questions do
+    resources :answers, only: [:create, :destroy]
+  end
+
 end

@@ -4,9 +4,12 @@
       ul.alert.alert-danger 
       - @question.errors.full_messages.each do |message|
         p = message     
-    
+  
 
     = form_for @question, html: {role: "form"} do |f|
+      .form-group 
+        = f.label :category_id, class: "control-label"
+        = f.collection_select(:category_id, Category.order(:name), :id, :name, {prompt: 'Select Category'}, {class: "form-control"})
       .form-group 
         = f.label :title, class: "control-label"
         = f.text_field :title, class: "form-control"

@@ -12,8 +12,6 @@ h1.text-center
 
 .container
   .col-md-8.col-md-offset-2
-    / .clearfix
-    / .well.well-lg 
     .text-center = @question.body
     .spacer20
     = link_to fa_icon("pencil", text: " Edit"), edit_question_path(@question), class: "pull-right"
@@ -24,14 +22,30 @@ h1.text-center
     hr  
     
     - if @answer.errors.any?
-      ul.alert.alert-danger 
+      ul.alert.alert-danger.errors 
         - @answer.errors.full_messages.each do |message|
           p = message     
           
-    = form_for [@question, @answer], html: {role: "form"} do |f|
+    = form_for [@question, @answer], html: {role: "form", id: "answer-form"} do |f|
       .form-group 
         = f.text_area :body, class: "form-control"
-      = f.submit nil, class: "btn btn-info pull-right btn-block"
-
-
+      .pull-right#answer-form-action  
+        a.btn.btn-default#answer-cancel-button Cancel  
+        = f.submit nil, class: "btn btn-info"
     
+    .clearfix
+    .spacer20
+    
+    - @answers = Answer.for_question(@question.id).order("created_at DESC").page(params[:page])
+        
+    ul.media-list#answer-list  
+      - @answers.each do |answer|
+        li.media 
+          .media-left
+            .media-object.media-temp-image
+          .media-body
+            .date = answer.created_at.strftime("%B %d, %Y")
+            = answer.body
+  
+.container.text-center
+  = paginate @answers  

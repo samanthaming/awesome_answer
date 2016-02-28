@@ -1,3 +1,26 @@
 // Place all the styles related to the answers controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#answer-list{
+  .media-temp-image{
+    width:50px;
+    height:50px;
+    background-color: #31B0D5;
+    &:before{
+      // content: "\f007";
+      // font-family: FontAwesome;
+    }
+  }
+  .date{
+    color:grey;
+    font-size: 12px;
+  }
+}
+
+#answer-form-action{
+  display:none;
+}
+#answer-cancel-button{
+  margin-right: 20px;
+}

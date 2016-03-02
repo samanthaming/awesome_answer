@@ -2,7 +2,8 @@
 // # All this logic will automatically be available in application.js.
 // # You can use CoffeeScript in this file: http://coffeescript.org/
 
-$(document).ready(function() {
+// $(document).ready(function() {
+$(document).on('page:change', function() {
   var $answerFormAction = $('#answer-form-action');
 
   //  If errors (which indicate user is creating an answer but failed)
@@ -23,7 +24,7 @@ $(document).ready(function() {
   });
 
   // Show delete answer button, when hover on that line
-  $('#answer-list').find('li').on('mouseenter',function() {
+  $('#answer-list > li').on('mouseenter',function() {
     $(this).find('#delete-answer-button').fadeIn();
   }).on('mouseleave',function() {
     $(this).find('#delete-answer-button').hide();

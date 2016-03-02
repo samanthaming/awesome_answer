@@ -6,27 +6,33 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   
-  - if params[:controller] === "questions"
-    body[data-no-turbolink="true"]  
-  - else
-    body
+  / - if params[:controller] == "questions"
+  /   body[data-no-turbolink="true"]  
+  / - else
+  body
 
-  nav.navbar.navbar-default
-    .container
-      .navbar-header
-        button.navbar-toggle type="button" data-toggle="collapse" data-target="#myNavbar"
-          span.icon-bar
-          span.icon-bar
-          span.icon-bar
-        a.navbar-brand href="#{root_path}" AwesomeAnswer
-      
-      .collapse.navbar-collapse#myNavbar.text-center
-        ul.nav.navbar-nav
-          li = link_to "Home", root_path
-          li = link_to fa_icon("plus", text: " Question"), new_question_path
-        ul.nav.navbar-nav.navbar-right
-          li = link_to "Signup", root_path  
-          li = link_to "Login", root_path  
+    nav.navbar.navbar-default
+      .container
+        .navbar-header
+          button.navbar-toggle type="button" data-toggle="collapse" data-target="#myNavbar"
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand href="#{root_path}" AwesomeAnswer
+        
+        .collapse.navbar-collapse#myNavbar.text-center
+          ul.nav.navbar-nav
+            li = link_to "Home", root_path
+            li = link_to fa_icon("plus", text: " Question"), new_question_path
+          ul.nav.navbar-nav.navbar-right
+            - if user_signed_in?
+              li = link_to current_user.first_name.titleize, users_path
+              li = link_to "Logout", sessions_path,
+                    method: :delete,
+                    data: {confirm: "Are you sure you want to logout?"}
+            -else
+              li = link_to "Signup", new_user_path
+              li = link_to "Login", new_session_path  
 
   .container-fluid
     - if alert

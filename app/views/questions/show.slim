@@ -45,8 +45,20 @@ h1.text-center
             .media-object.media-temp-image
           .media-body
             .date = answer.created_at.strftime("%B %d, %Y")
+            = answer.id
             = answer.body
-          .media-right.media-middle
+            
+            / Comment
+            - @comments = Comment.for_answer(answer.id) 
+            .media-nested-wrap
+              - @comments.each do |comment|
+                .media
+                  .media-left
+                    .media-object.media-temp-image-xs
+                  .media-body 
+                    = comment.body 
+                    / = fa_icon "remove"
+          .media-right
             = link_to (fa_icon "remove"), 
                 question_answer_path(@question, answer), 
                 class: "text-muted",

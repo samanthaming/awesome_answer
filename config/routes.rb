@@ -21,4 +21,10 @@ Rails.application.routes.draw do
     resources :answers, only: [:create, :destroy]
   end
 
+  resources :users, only:[:create, :new, :index]
+
+  resources :sessions, only:[:new, :create] do
+    delete :destroy, on: :collection
+  end
+
 end

@@ -9,10 +9,11 @@ $media-color:#31B0D5;
     width:50px;
     height:50px;
     background-color: $media-color;
-    &:before{
-      // content: "\f007";
-      // font-family: FontAwesome;
-    }
+  }
+  .media-temp-image-xs{
+    width:20px;
+    height:20px;
+    background-color: cornflowerblue;
   }
   .date{
     color:grey;
@@ -23,13 +24,12 @@ $media-color:#31B0D5;
   }
 
   // overwrite bootstrap
-  .media{
+  & > .media{
     margin-top: 0;
     padding:10px 5px;
   }
 
 }
-
 #answer-form-action{
   display:none;
 }

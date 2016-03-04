@@ -3,6 +3,8 @@ class Question < ActiveRecord::Base
   belongs_to :user
   has_many :answers, dependent: :destroy
   has_many :comments, through: :answers
+  has_many :likes, dependent: :destroy
+  has_many :liked_users, through: :likes, source: :like
 
   # this will fail validations (so it won't create or save) if the title is
   # not provided
@@ -60,8 +62,12 @@ class Question < ActiveRecord::Base
     category.name if category
   end
 
-  def user_full_name
-    
+  def like_for(user)
+    likes.find_by_user_id user
+  end
+
+  def likes_count
+    likes.count if likes.count > 0
   end
 
   private

@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   has_many :questions
   has_many :likes, dependent: :destroy
   has_many :liked_questions, through: :likes, source: :like
+  has_many :favorites, dependent: :destroy
+  has_many :favorite_questions, through: :favorites, source: :favorite
 
   validates :password, length: {minimum: 6}
   validates :first_name, presence: true

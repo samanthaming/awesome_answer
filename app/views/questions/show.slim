@@ -17,22 +17,40 @@ p.text-center
 .container
   .col-md-8.col-md-offset-2
     .text-center = @question.body
-    .pull-left
     
-      span.text-muted#question-likes-count = @question.likes_count
-      
-      - like = @question.like_for(current_user)
-      - if like
-        = link_to fa_icon("thumbs-down lg"), question_like_path(@question, like),
-            method: :delete,
-            class: "text-muted"
-      - else
-        = link_to fa_icon("thumbs-up lg"), question_likes_path(@question),
-            method: :post,
-            class: "text-muted"
-          
+    / *** Edit question ***      
     - if can? :manage, @question
-      = link_to fa_icon("pencil", text: " Edit"), edit_question_path(@question), class: "pull-right"
+    = link_to fa_icon("pencil", text: " Edit"), edit_question_path(@question), class: "pull-left"
+    
+    ul.list-inline.pull-right
+      li
+        / *** Like question ***
+        - like = @question.like_for(current_user)
+        - if like
+          = link_to fa_icon("thumbs-down lg"), question_like_path(@question, like),
+              method: :delete,
+              class: "text-muted"
+        - else
+          = link_to fa_icon("thumbs-up lg"), question_likes_path(@question),
+              method: :post,
+              class: "text-muted"
+        
+        span.text-muted.count = @question.likes_count
+        
+      li
+        /** Favorite question **
+        - favorite = @question.favorite_for(current_user)
+        - if favorite 
+          = link_to fa_icon("heart-o lg"), question_favorite_path(@question, favorite),
+              method: :delete,
+              class: "text-muted"
+        - else 
+          = link_to fa_icon("heart lg"), question_favorites_path(@question),
+              method: :post,
+              class: "text-muted"
+          
+        span.text-muted.count = @question.favorites_count  
+
   
 .spacer10
 

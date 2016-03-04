@@ -5,6 +5,8 @@ class Question < ActiveRecord::Base
   has_many :comments, through: :answers
   has_many :likes, dependent: :destroy
   has_many :liked_users, through: :likes, source: :like
+  has_many :favorites, dependent: :destroy
+  has_many :favorite_users, through: :favorites, source: :favorite
 
   # this will fail validations (so it won't create or save) if the title is
   # not provided
@@ -68,6 +70,14 @@ class Question < ActiveRecord::Base
 
   def likes_count
     likes.count if likes.count > 0
+  end
+
+  def favorite_for user
+    favorites.find_by_user_id user
+  end
+
+  def favorites_count
+    favorites.count if favorites.count > 0
   end
 
   private

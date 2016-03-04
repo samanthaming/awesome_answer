@@ -21,4 +21,5 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_user
 
+
 end

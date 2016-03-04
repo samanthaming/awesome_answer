@@ -7,6 +7,10 @@ h1.text-center
   p.text-center
     strong.text-muted Category: 
     = @question.category_name
+
+p.text-center
+  strong.text-muted By: 
+  = user_full_name(@question)
     
 .spacer20
 
@@ -14,7 +18,8 @@ h1.text-center
   .col-md-8.col-md-offset-2
     .text-center = @question.body
     .spacer20
-    = link_to fa_icon("pencil", text: " Edit"), edit_question_path(@question), class: "pull-right"
+    - if can? :manage, @question
+      = link_to fa_icon("pencil", text: " Edit"), edit_question_path(@question), class: "pull-right"
 
 .container
   .col-md-8.col-md-offset-2
@@ -44,8 +49,9 @@ h1.text-center
           .media-left
             .media-object.media-temp-image
           .media-body
-            .date = answer.created_at.strftime("%B %d, %Y")
-            = answer.id
+            .date 
+              strong = user_full_name(answer)
+              = format_date answer.created_at
             = answer.body
             
             / Comment
@@ -57,14 +63,15 @@ h1.text-center
                     .media-object.media-temp-image-xs
                   .media-body 
                     = comment.body 
-                    / = fa_icon "remove"
+
           .media-right
-            = link_to (fa_icon "remove"), 
-                question_answer_path(@question, answer), 
-                class: "text-muted",
-                id: "delete-answer-button",
-                method: :delete,
-                data: {confirm: "Are you sure?"}
+            - if can? :manage, answer
+              = link_to (fa_icon "remove"), 
+                  question_answer_path(@question, answer), 
+                  class: "text-muted",
+                  id: "delete-answer-button",
+                  method: :delete,
+                  data: {confirm: "Are you sure?"}
 
 .container.text-center
   = paginate @answers  

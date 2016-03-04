@@ -1,5 +1,6 @@
 class Question < ActiveRecord::Base
   belongs_to :category
+  belongs_to :user
   has_many :answers, dependent: :destroy
   has_many :comments, through: :answers
 
@@ -57,6 +58,10 @@ class Question < ActiveRecord::Base
 
   def category_name
     category.name if category
+  end
+
+  def user_full_name
+    
   end
 
   private

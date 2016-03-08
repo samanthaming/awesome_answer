@@ -4,8 +4,12 @@ gem "font-awesome-rails"
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'kaminari'
 gem 'slim'
-gem 'slim-rails'
+# gem 'slim-rails'
 gem 'cancancan', '~> 1.10'
+gem 'delayed_job_active_record'
+gem "delayed_job_web"
+gem "letter_opener", :group => :development
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5.1'
@@ -52,7 +56,7 @@ group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
   gem "rails-erd"
-  
+
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 

@@ -86,6 +86,18 @@ p.text-center
               strong = user_full_name(answer)
               = format_date answer.created_at
             = answer.body
+            .spacer5
+            p.typo-smaller = link_to "Reply", nil, class: ["text-muted", "show-comment-form"]
+            
+            = form_for [answer, @comment], html: {role: "form", class:"comment-form"} do |f|
+              .form-group
+                = f.text_area :body, class: "form-control"
+              .pull-right.comment-form-action
+                a.btn.btn-default.comment-cancel-button Cancel
+                = f.submit nil, class: "btn btn-info"
+                
+                
+            .clearfix
             
             / Comment
             - @comments = Comment.for_answer(answer.id) 

@@ -30,13 +30,11 @@ $media-color:#31B0D5;
   }
 
 }
-#answer-form-action{
+#answer-form-action,
+#delete-answer-button,
+.comment-form{
   display:none;
 }
-#answer-cancel-button{
+#answer-cancel-button, .comment-cancel-button{
   margin-right: 20px;
-}
-
-#delete-answer-button{
-  display:none;
 }

@@ -24,6 +24,7 @@ class QuestionsController < ApplicationController
     @question.view_count += 1
     @question.save
     @answer = Answer.new
+    @comment = Comment.new
   end
 
   def index

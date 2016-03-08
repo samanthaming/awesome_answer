@@ -14,6 +14,9 @@ class Question < ActiveRecord::Base
   has_many :favorites, dependent: :destroy
   has_many :favorite_users, through: :favorites, source: :favorite
 
+  has_many :votes, dependent: :destroy
+  has_many :voting_users, through: :votes, source: :user
+
   # this will fail validations (so it won't create or save) if the title is
   # not provided
   validates :title, presence:   true,
@@ -84,6 +87,15 @@ class Question < ActiveRecord::Base
 
   def favorites_count
     favorites.count if favorites.count > 0
+  end
+
+  def vote_for(user)
+    votes.find_by_user_id user
+  end
+
+  def vote_result
+    # votes.where(is_up: true).count - votes.where(is_up: false).count
+    votes.up_count - votes.down_count
   end
 
   private

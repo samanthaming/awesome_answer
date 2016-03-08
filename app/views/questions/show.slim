@@ -30,6 +30,22 @@ ul.list-inline.text-center
     = link_to fa_icon("pencil", text: " Edit"), edit_question_path(@question), class: "pull-left"
     
     ul.list-inline.pull-right
+      li 
+        / *** Vote *** 
+        - vote = @question.vote_for(current_user)
+        - if !vote 
+          = link_to "Vote up", question_votes_path(@question, {vote: {is_up: true} }), method: :post 
+          span.count = link_to "Vote down", question_votes_path(@question, {vote: {is_up: false} }), method: :post
+          span.text-muted.count = @question.vote_result
+        - elsif vote.is_up?
+          = link_to "Remove Vote up", question_vote_path(@question, vote), method: :delete 
+          span.count = link_to "Vote down", question_vote_path(@question, vote, vote: {is_up: false}), method: :patch
+          span.text-muted.count = @question.vote_result
+        - else
+          = link_to "Vote Up", question_vote_path(@question, vote, vote: {is_up: true}), method: :patch 
+          span.count = link_to "Remove Vote down", question_vote_path(@question,vote), method: :delete 
+          span.text-muted.count = @question.vote_result 
+          
       li
         / *** Like question ***
         - like = @question.like_for(current_user)

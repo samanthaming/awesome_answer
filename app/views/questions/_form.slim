@@ -10,6 +10,9 @@
       .form-group 
         = f.label :category_id, class: "control-label"
         = f.collection_select(:category_id, Category.order(:name), :id, :name, {prompt: 'Select Category'}, {class: "form-control"})
+      .form_group 
+        / tag_ids = [1,2,3]
+        = f.collection_check_boxes(:tag_ids, Tag.order("name"), :id, :name)
       .form-group 
         = f.label :title, class: "control-label"
         = f.text_field :title, class: "form-control"

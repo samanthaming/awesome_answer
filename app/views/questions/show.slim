@@ -11,6 +11,13 @@ h1.text-center
 p.text-center
   strong.text-muted By: 
   = user_full_name(@question)
+
+- if @question.taggings  
+ul.list-inline.text-center 
+  - @question.taggings.each do |t|
+    li = fa_icon("tag", text: "#{t.tag.name}")
+    
+    
     
 .spacer20
 

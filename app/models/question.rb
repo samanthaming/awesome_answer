@@ -1,10 +1,16 @@
 class Question < ActiveRecord::Base
   belongs_to :category
   belongs_to :user
+
   has_many :answers, dependent: :destroy
   has_many :comments, through: :answers
+
+  has_many :taggings, dependent: :destroy
+  has_many :tags, through: :taggings
+
   has_many :likes, dependent: :destroy
   has_many :liked_users, through: :likes, source: :like
+
   has_many :favorites, dependent: :destroy
   has_many :favorite_users, through: :favorites, source: :favorite
 

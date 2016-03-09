@@ -12,8 +12,8 @@ $(document).on('page:change', function() {
     $answerFormAction.show();
   }else{
     $('#answer_body').on('click', function(){
-      console.log($answerFormAction);
-      console.log("hi");
+      // console.log($answerFormAction);
+
       $answerFormAction.slideDown();
     });
   }

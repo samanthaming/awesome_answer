@@ -1,0 +1,11 @@
+- if @answer.errors.any?
+  ul.alert.alert-danger.errors 
+    - @answer.errors.full_messages.each do |message|
+      p = message     
+      
+= form_for [@question, @answer], html: {role: "form", id: "answer-form", remote: true} do |f|
+  .form-group 
+    = f.text_area :body, class: "form-control"
+  .pull-right#answer-form-action  
+    a.btn.btn-default#answer-cancel-button Cancel  
+    = f.submit nil, class: "btn btn-info"

@@ -82,64 +82,18 @@ ul.list-inline.text-center
     h3.text-muted Answers
     hr  
     
-    - if @answer.errors.any?
-      ul.alert.alert-danger.errors 
-        - @answer.errors.full_messages.each do |message|
-          p = message     
-          
-    = form_for [@question, @answer], html: {role: "form", id: "answer-form"} do |f|
-      .form-group 
-        = f.text_area :body, class: "form-control"
-      .pull-right#answer-form-action  
-        a.btn.btn-default#answer-cancel-button Cancel  
-        = f.submit nil, class: "btn btn-info"
+    #answer-form = render "answers/form"
     
     .clearfix
     .spacer20
     
+    / ** List Answers **
     - @answers = Answer.for_question(@question.id).order("created_at DESC").page(params[:page])
         
     ul.media-list#answer-list  
-      - @answers.each do |answer|
-        li.media 
-          .media-left
-            .media-object.media-temp-image
-          .media-body
-            .date 
-              strong = user_full_name(answer)
-              = format_date answer.created_at
-            = answer.body
-            .spacer5
-            p.typo-smaller = link_to "Reply", nil, class: ["text-muted", "show-comment-form"]
-            
-            = form_for [answer, @comment], html: {role: "form", class:"comment-form"} do |f|
-              .form-group
-                = f.text_area :body, class: "form-control"
-              .pull-right.comment-form-action
-                a.btn.btn-default.comment-cancel-button Cancel
-                = f.submit nil, class: "btn btn-info"
-                
-                
-            .clearfix
-            
-            / Comment
-            - @comments = Comment.for_answer(answer.id) 
-            .media-nested-wrap
-              - @comments.each do |comment|
-                .media
-                  .media-left
-                    .media-object.media-temp-image-xs
-                  .media-body 
-                    = comment.body 
+      - @answers.each do |ans|
+        = render "answers/answer", answer: ans
 
-          .media-right
-            - if can? :manage, answer
-              = link_to (fa_icon "remove"), 
-                  question_answer_path(@question, answer), 
-                  class: "text-muted",
-                  id: "delete-answer-button",
-                  method: :delete,
-                  data: {confirm: "Are you sure?"}
 
 .container.text-center
   = paginate @answers  

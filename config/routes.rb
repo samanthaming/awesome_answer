@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root "questions#index"
 
+  match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]
+
   # The main job of the routes:
   # You map a request to a controller with no action
   get "/hello/" => "welcome#index"

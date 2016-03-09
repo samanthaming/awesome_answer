@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :destroy]
   end
 
-  resources :users, only:[:create, :new, :index]
+  resources :users
 
   resources :sessions, only:[:new, :create] do
     delete :destroy, on: :collection

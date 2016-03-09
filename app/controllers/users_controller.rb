@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :logged_in, only: [ :new, :create ]
+  before_action :authenticate_user, only: [:edit, :update]
 
   def new
     @user = User.new
@@ -20,6 +21,20 @@ class UsersController < ApplicationController
 
   def index
 
+  end
+
+  def edit
+    @user = current_user
+  end
+
+  def update
+    @user = User.find current_user.id
+    if @user.update user_params
+      redirect_to @user, notice: "Account Updated"
+    else
+      flash[:alert] = "Account Failed to Update!"
+      render :edit
+    end
   end
 
   private

@@ -26,11 +26,11 @@ html
             li = link_to fa_icon("plus", text: " Question"), new_question_path
           ul.nav.navbar-nav.navbar-right
             - if user_signed_in?
-              li = link_to current_user.first_name.titleize, users_path
+              li = link_to current_user.first_name.titleize, user_path(current_user)
               li = link_to "Logout", sessions_path,
                     method: :delete,
                     data: {confirm: "Are you sure you want to logout?"}
-            -else
+            - else
               li = link_to "Signup", new_user_path
               li = link_to "Login", new_session_path  
 

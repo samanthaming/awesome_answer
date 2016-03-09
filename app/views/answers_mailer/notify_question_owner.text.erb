@@ -3,6 +3,8 @@ You've gotten an answer to your question:
 Question title: <%= @question.title %>
 The Answer: <%= @answer.body %>
 
+Click <%= link_to "here", question_url(@question) %> to view your question.
+
 Regards,
 
 Awesome Answers Team

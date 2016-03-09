@@ -3,6 +3,8 @@
 <p>Question title: <%= @question.title %></p>
 <p>The Answer: <%= @answer.body %></p>
 
+<p>Click <%= link_to "here", question_url(@question) %> to view your question.</p>
+
 <p>Regards,</p>
 
 <p>Awesome Answers Team</p>

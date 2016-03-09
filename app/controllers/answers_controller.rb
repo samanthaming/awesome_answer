@@ -16,11 +16,12 @@ class AnswersController < ApplicationController
       if @answer.save
         # AnswersMailer.notify_question_owner(@answer).deliver_later
         format.html {redirect_to question_path(@question), notice: "Answer Created!"}
+
+        ## b/c using slim, need to set layout: false, otherwise, application template would be included
         format.js { render :create_success, layout: false }
       else
-        # format.html{render "/questions/show"}
-        # format.js {render :create_failure}
-        # format.js { render js: "alert('Hello Rails');" }
+        format.html{ render "/questions/show" }
+        format.js { render :create_failure, layout: false }
       end
     end
 
@@ -29,7 +30,12 @@ class AnswersController < ApplicationController
   def destroy
     # @answer = Answer.find params[:id]
     @answer.destroy
-    redirect_to question_path(params[:question_id]), notice: "Answer Deleted!"
+
+    respond_to do |format|
+      format.html { redirect_to question_path(params[:question_id]), notice: "Answer Deleted!" }
+      format.js { render :destroy, layout: false }
+    end
+
   end
 
   private
@@ -40,7 +46,6 @@ class AnswersController < ApplicationController
 
   def authorize_user
     unless (can? :manage, @answer) || (can? :destroy, @answer)
-    # unless can? :manage, @answer
       redirect_to root_path, alert: "access denied!"
     end
   end

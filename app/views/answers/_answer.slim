@@ -1,4 +1,4 @@
-li.media 
+li.media id=dom_id(answer) 
   .media-left
     .media-object.media-temp-image
   .media-body
@@ -35,4 +35,5 @@ li.media
           question_answer_path(@question, answer), 
           class: "text-muted",
           id: "delete-answer-button",
-          method: :delete
+          method: :delete,
+          remote: true

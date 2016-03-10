@@ -1,0 +1,10 @@
+.media.comment-line id=dom_id(comment)
+  .media-left
+    .media-object.media-temp-image-xs
+  .media-body 
+    = comment.body 
+    = link_to (fa_icon "remove"),
+      answer_comment_path(answer, comment),
+      class: "text-muted delete-comment-button",
+      method: :delete,
+      remote: true

@@ -95,6 +95,8 @@ ul.list-inline.text-center
       - @answers.each do |ans|
         = render "answers/answer", answer: ans
 
+/ ans.comments.build
+/ Comment.new(answer: ans)
 
 .container.text-center
   = paginate @answers  

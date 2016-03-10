@@ -8,7 +8,7 @@ $(document).on('page:change', function() {
 
   //  If errors (which indicate user is creating an answer but failed)
   // then show the buttons. else show buttons only when clicks on form
-  if($('.errors').length > 0){
+  if($answerFormAction.find('.field_with_errors').length > 0){
     $answerFormAction.show();
   }else{
     $('#answer_body').on('click', function(){
@@ -24,7 +24,7 @@ $(document).on('page:change', function() {
   });
 
   // Show delete answer button, when hover on that line
-  $('#answer-list > li').on('mouseenter',function() {
+  $('#answer-list').on('mouseenter',"li", function() {
     $(this).find('#delete-answer-button').fadeIn();
   }).on('mouseleave',function() {
     $(this).find('#delete-answer-button').hide();

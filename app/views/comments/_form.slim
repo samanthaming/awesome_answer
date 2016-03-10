@@ -1,0 +1,11 @@
+- if @comment.errors.any?
+  ul.alert.alert-danger.errors 
+    - @comment.errors.full_messages.each do |message|
+      p = message  
+    
+= form_for [answer, @comment], html: {role: "form", class: "comment-form"},remote: true do |f|
+  .form-group
+    = f.text_area :body, class: "form-control"
+  .pull-right.comment-form-action
+    a.btn.btn-default.comment-cancel-button Cancel
+    = f.submit nil, class: "btn btn-info"

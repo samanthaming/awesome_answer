@@ -7,27 +7,20 @@ li.media id=dom_id(answer)
       = format_date answer.created_at
     = answer.body
     .spacer5
-    p.typo-smaller = link_to "Reply", nil, class: ["text-muted", "show-comment-form"]
+    p.typo-smaller = link_to "Reply", "#", class: ["text-muted", "show-comment-form"]
     
-    = form_for [answer, @comment], html: {role: "form", class: "comment-form"} do |f|
-      .form-group
-        = f.text_area :body, class: "form-control"
-      .pull-right.comment-form-action
-        a.btn.btn-default.comment-cancel-button Cancel
-        = f.submit nil, class: "btn btn-info"
+    // ** Comment Form **
+    #comment-form-wrap 
+      = render "comments/form", answer: answer
         
-        
+            
     .clearfix
     
     / Comment
     - @comments = Comment.for_answer(answer.id) 
-    .media-nested-wrap
-      - @comments.each do |comment|
-        .media
-          .media-left
-            .media-object.media-temp-image-xs
-          .media-body 
-            = comment.body 
+    .media-nested-wrap#comment-list
+      - @comments.each do |com|
+        = render "comments/comment", answer: answer, comment: com
 
   .media-right
     - if (can? :manage, answer) || (can? :destroy, answer)

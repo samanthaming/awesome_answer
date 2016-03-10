@@ -46,19 +46,10 @@ ul.list-inline.text-center
           span.count = link_to "Remove Vote down", question_vote_path(@question,vote), method: :delete 
           span.text-muted.count = @question.vote_result 
           
-      li
+      li#question-like
         / *** Like question ***
-        - like = @question.like_for(current_user)
-        - if like
-          = link_to fa_icon("thumbs-down lg"), question_like_path(@question, like),
-              method: :delete,
-              class: "text-muted"
-        - else
-          = link_to fa_icon("thumbs-up lg"), question_likes_path(@question),
-              method: :post,
-              class: "text-muted"
+        = render "likes/like"
         
-        span.text-muted.count = @question.likes_count
         
       li#question-favorite
         /** Favorite question **

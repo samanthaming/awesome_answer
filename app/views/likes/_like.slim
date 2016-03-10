@@ -1,0 +1,13 @@
+- like = @question.like_for(current_user)
+- if like
+  = link_to fa_icon("thumbs-down lg"), question_like_path(@question, like),
+      method: :delete,
+      class: "text-muted",
+      remote: true
+- else
+  = link_to fa_icon("thumbs-up lg"), question_likes_path(@question),
+      method: :post,
+      class: "text-muted",
+      remote: true
+
+span.text-muted.count = @question.likes_count

@@ -2,22 +2,31 @@ class FavoritesController < ApplicationController
   before_action :authenticate_user
 
   def create
-    q = Question.find params[:question_id]
-    favorite = Favorite.new(question: q, user: current_user)
+    @question = Question.find params[:question_id]
+    favorite = Favorite.new(question: @question, user: current_user)
 
-    if favorite.save
-      redirect_to q, notice: "Favorited!"
-    else
-      redirect_to q, alert: "Favorite Failed!"
+    respond_to do |format|
+      if favorite.save
+        format.html { redirect_to @question, notice: "Favorited!" }
+        format.js { render :create_success, layout: false }
+      else
+        format.html { redirect_to @question, alert: "Favorite Failed!" }
+        format.js { render :create_failure, layout: false }
+      end
     end
   end
 
 
   def destroy
-    q = Question.find params[:question_id]
+    @question = Question.find params[:question_id]
     favorite = current_user.favorites.find params[:id]
     favorite.destroy
-    redirect_to q, notice: "Un-favorited!"
+
+    respond_to do |format|
+      format.html { redirect_to @question, notice: "Un-favorited!" }
+      format.js { render :destroy, layout: false}
+    end
+
   end
 
 end

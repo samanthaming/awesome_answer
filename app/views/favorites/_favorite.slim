@@ -1,0 +1,13 @@
+- favorite = @question.favorite_for(current_user)
+- if favorite 
+  = link_to fa_icon("heart-o lg"), question_favorite_path(@question, favorite),
+      method: :delete,
+      class: "text-muted",
+      remote: true
+- else 
+  = link_to fa_icon("heart lg"), question_favorites_path(@question),
+      method: :post,
+      class: "text-muted",
+      remote: true
+  
+span.text-muted.count = @question.favorites_count  

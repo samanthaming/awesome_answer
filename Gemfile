@@ -10,6 +10,7 @@ gem 'delayed_job_active_record'
 gem "delayed_job_web"
 gem "letter_opener", :group => :development
 gem 'simple_form'
+gem 'friendly_id'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

@@ -1,4 +1,8 @@
 class Question < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :title, use: [:slugged, :history]
+
+
   belongs_to :category
   belongs_to :user
 

@@ -20,7 +20,6 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    # @question = Question.find params[:id]
     @question.view_count += 1
     @question.save
     @answer = Answer.new
@@ -32,11 +31,10 @@ class QuestionsController < ApplicationController
   end
 
   def edit
-    # @question = Question.find params[:id]
+
   end
 
   def update
-    # @question = Question.find params[:id]
 
     if @question.update question_params
       redirect_to question_path(@question), notice: "Question Updated"
@@ -46,7 +44,6 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    # @question = Question.find params[:id]
     @question.destroy
     redirect_to questions_path, alert: "Question Deleted"
   end
@@ -58,7 +55,7 @@ class QuestionsController < ApplicationController
   end
 
   def find_question
-    @question = Question.find params[:id]
+    @question = Question.friendly.find(params[:id])
   end
 
   def authorize_user

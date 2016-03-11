@@ -1,6 +1,9 @@
 .media.comment-line id=dom_id(comment)
   .media-left
-    .media-object.media-temp-image-xs
+    - if comment.user.image.present?
+      .media-object = image_tag comment.user.image.url(:thumb_tiny)
+    - else
+      .media-object.media-temp-image-xs
   .media-body 
     = comment.body 
     = link_to (fa_icon "remove"),

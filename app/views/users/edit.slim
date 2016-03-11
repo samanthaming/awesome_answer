@@ -21,7 +21,12 @@ h1.page-header.text-center Edit Account
         .col-md-12
           = f.label :email, class: "control-label"
         .col-md-12
-          = f.email_field :email, {class: "form-control"}  
+          = f.email_field :email, {class: "form-control"}
+      .row.form-group 
+        .col-md-12
+          = f.label :image, class: "control-label"
+        .col-md-12  
+          = f.file_field :image, class: "form-control"
       .row.form-group    
         .col-md-12
           = f.submit nil, class: "btn btn-lg btn-primary btn-block"

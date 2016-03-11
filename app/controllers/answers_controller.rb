@@ -5,7 +5,7 @@ class AnswersController < ApplicationController
 
 
   def create
-    @question = Question.find params[:question_id]
+    @question = Question.friendly.find params[:question_id]
     answer_params = params.require(:answer).permit(:body)
     @answer = Answer.new answer_params
     @answer.question = @question

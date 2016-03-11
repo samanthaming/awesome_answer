@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem "font-awesome-rails"
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'kaminari'
+gem 'bootstrap-kaminari-views'
 gem 'slim'
 # gem 'slim-rails'
 gem 'cancancan', '~> 1.10'
@@ -11,6 +12,10 @@ gem "delayed_job_web"
 gem "letter_opener", :group => :development
 gem 'simple_form'
 gem 'friendly_id'
+gem 'quiet_assets'
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'fog'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

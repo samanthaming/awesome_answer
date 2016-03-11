@@ -1,6 +1,9 @@
 li.media id=dom_id(answer) 
   .media-left
-    .media-object.media-temp-image
+    - if answer.user.image.present?
+      .media-object = image_tag answer.user.image.url(:square_thumb)
+    - else
+      .media-object.media-temp-image
   .media-body
     .date 
       strong = user_full_name(answer)

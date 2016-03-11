@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
   has_many :votes, dependent: :destroy
   has_many :voted_question, through: :votes, source: :question
 
+  mount_uploader :image, ImageUploader
+
   validates :password, length: {minimum: 6}, on: :create ## make sure you have this, otherwise require password everytime you update account
   validates :first_name, presence: true
   validates :last_name, presence: true

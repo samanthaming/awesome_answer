@@ -1,22 +1,9 @@
 .container
   .col-md-8.col-md-offset-2  
-    - if @question.errors.any?
-      ul.alert.alert-danger 
-      - @question.errors.full_messages.each do |message|
-        p = message     
-  
-
-    = form_for @question, html: {role: "form"} do |f|
-      .form-group 
-        = f.label :category_id, class: "control-label"
-        = f.collection_select(:category_id, Category.order(:name), :id, :name, {prompt: 'Select Category'}, {class: "form-control"})
-      .form_group 
-        / tag_ids = [1,2,3]
-        = f.collection_check_boxes(:tag_ids, Tag.order("name"), :id, :name)
-      .form-group 
-        = f.label :title, class: "control-label"
-        = f.text_field :title, class: "form-control"
-      .form-group
-        = f.label :body, class: "control-label"
-        = f.text_area :body, {class: "form-control", rows: "5"}
+    = simple_form_for(@question, html: { class: 'form-horizontal' }) do |f|
+      = f.input :category_id, collection: Category.order(:name), prompt: "Select Category"
+      = f.input :title
+      = f.input :body
+      / = f.association :tags, as: :check_boxes, item_wrapper_class: "checkbox-inline"
+      = f.association :tags, as: :check_boxes
       = f.submit nil, class: "btn btn-lg btn-primary btn-block"

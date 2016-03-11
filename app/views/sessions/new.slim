@@ -2,18 +2,9 @@ h1.page-header.text-center Login
 
 .container
   .col-md-8.col-md-offset-2  
-
-    = form_tag(sessions_path, {role: "form"}) do
-      .row.form-group
-        .col-md-12
-          = label_tag :email, nil, class: "control-label"
-        .col-md-12
-          = email_field_tag :email, nil, class: 'form-control'
-      .row.form-group   
-        .col-md-12
-          = label_tag :password, nil, class: "control-label"
-        .col-md-12
-          = password_field_tag :password, nil, class: "form-control"
-      .row.form-group    
-        .col-md-12
-          = submit_tag nil, class: "btn btn-lg btn-primary btn-block"
+    / Use a symbol in place for the model of no instance. need to update controller 
+    = simple_form_for(:session, url: sessions_path) do |f|
+      = f.input :email
+      = f.input :password
+      / = f.input :remember_me, inline_label: 'Yes, remember me' 
+      = f.submit "Login", class: "btn btn-lg btn-primary btn-block"

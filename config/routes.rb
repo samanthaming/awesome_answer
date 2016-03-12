@@ -30,6 +30,13 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :destroy]
   end
 
+  # /api/v1/questions
+  namespace :api, defaults: {format: :json} do
+    namespace :v1 do
+      resources :questions, only: [:index, :show]
+    end
+  end
+
   resources :users
 
   resources :sessions, only:[:new, :create] do

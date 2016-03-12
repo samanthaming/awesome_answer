@@ -16,6 +16,7 @@ gem 'quiet_assets'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'fog'
+gem 'rack-cors', :require => 'rack/cors'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

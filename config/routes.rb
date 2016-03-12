@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 
 
   resources :questions do
-    resources :answers, only: [:create, :destroy]
+    resources :answers, only: [:create, :destroy, :index]
     resources :likes, only: [:create, :destroy]
     resources :favorites, only: [:create, :destroy]
     resources :votes, only: [:create, :update, :destroy]

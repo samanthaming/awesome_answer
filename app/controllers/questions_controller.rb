@@ -24,10 +24,20 @@ class QuestionsController < ApplicationController
     @question.save
     @answer = Answer.new
     @comment = Comment.new
+
+    respond_to do |format|
+      format.html { render }
+      format.json { render json: @question }
+    end
   end
 
   def index
     @questions = Question.order("created_at DESC").page(params[:page])
+
+    respond_to do |format|
+      format.html { render }
+      format.json { render json: @questions.select(:id, :title, :view_count) }
+    end
   end
 
   def edit

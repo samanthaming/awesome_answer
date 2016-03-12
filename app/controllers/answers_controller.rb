@@ -24,7 +24,12 @@ class AnswersController < ApplicationController
         format.js { render :create_failure, layout: false }
       end
     end
+  end
 
+  def index
+    # @question = Question.friendly.find params[:question_id] # if want to use friendlyId
+    @question = Question.find params[:question_id] # but b/c json, maybe use ID instead
+    render json: @question.answers
   end
 
   def destroy

@@ -17,6 +17,7 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'fog'
 gem 'rack-cors', :require => 'rack/cors'
+gem 'active_model_serializers'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

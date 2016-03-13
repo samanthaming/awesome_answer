@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :liked_questions, through: :likes, source: :like
 
   has_many :favorites, dependent: :destroy
-  has_many :favorite_questions, through: :favorites, source: :favorite
+  has_many :favorite_questions, through: :favorites, source: :question
 
   has_many :votes, dependent: :destroy
   has_many :voted_question, through: :votes, source: :question
@@ -21,5 +21,23 @@ class User < ActiveRecord::Base
   validates :email, presence: true,
                     uniqueness: true,
                     format: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
+
+  before_create :generate_api_key
+
+  private
+
+  def generate_api_key
+    # self.api_key = SecureRandom.hex(32)
+    #
+    # while User.exists?(api_key: self.api_key)
+    #   self.api_key = SecureRandom.hex(32)
+    # end
+
+    # Refactored...
+    begin
+      self.api_key = SecureRandom.hex(32)
+    end while User.exists?(api_key: self.api_key)
+
+  end
 
 end

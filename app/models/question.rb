@@ -13,7 +13,7 @@ class Question < ActiveRecord::Base
   has_many :tags, through: :taggings
 
   has_many :likes, dependent: :destroy
-  has_many :liked_users, through: :likes, source: :like
+  has_many :liked_users, through: :likes, source: :user
 
   has_many :favorites, dependent: :destroy
   has_many :favorite_users, through: :favorites, source: :favorite
